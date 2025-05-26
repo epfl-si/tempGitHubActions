@@ -27,7 +27,7 @@ jobs:
       - name: Create new branch in wp-theme-2018
         run: |
           cd theme
-          git checkout -b feature/update-from-elements-$(date +%s)
+          git checkout -b feature/update-from-elements-${{ github.event.release.tag_name }}
 
       - name: Copy css and js files to wp-theme-2018
         run: |
@@ -46,5 +46,5 @@ jobs:
             echo "No changes to commit, skipping push."
           else
             git commit -m "New element version ${{ github.event.release.tag_name }}"
-            git push
+            git push --set-upstream origin feature/update-from-elements-${{ github.event.release.tag_name }}
           fi
