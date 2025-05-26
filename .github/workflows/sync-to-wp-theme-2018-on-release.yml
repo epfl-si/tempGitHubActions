@@ -12,14 +12,14 @@ jobs:
       - name: Checkout elements
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/epfl-si/elements.git
+          repository: epfl-si/elements
           ref: dist/frontend
           path: elements
 
       - name: Checkout wp-theme-2018
         uses: actions/checkout@v4
         with:
-          repository: git@github.com:epfl-si/wp-theme-2018.git
+          repository: epfl-si/wp-theme-2018
           ref: master
           ssh-key: ${{ secrets.ELEMENTS }}
           path: theme
