@@ -18,12 +18,18 @@ jobs:
           ref: dist/frontend
           path: elements
 
+      - name: Setup SSH Key for wp-theme-2018
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ELEMENTS }}" > ~/.ssh/elements
+          chmod 600 ~/.ssh/elements
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Checkout wp-theme-2018
         uses: actions/checkout@v4
         with:
           repository: epfl-si/wp-theme-2018
           ref: master
-          ssh-key: ${{ secrets.ELEMENTS }}
           path: theme
 
       - name: Create new branch in wp-theme-2018
