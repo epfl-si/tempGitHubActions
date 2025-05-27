@@ -4,6 +4,7 @@ on:
     types: [created]
     env:
       tag: 1 # ${{ github.event.release.tag_name }}
+
   workflow_dispatch:  # 👈 manual trigger
 
 jobs:
@@ -14,11 +15,11 @@ jobs:
       - name: Setup SSH Key for wp-theme-2018
         run: |
           mkdir -p ~/.ssh
-          echo ${{ secrets.ELEMENTS }}
-          echo ${{ secrets.ELEMENTS }} > ~/.ssh/id_rsa
+          echo "$ELEMENTS_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          base64 < ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+        env: # Or as an environment variable
+          ELEMENTS_PRIVATE_KEY: ${{ secrets.ELEMENTS }}
 
       - name: Checkout elements
         uses: actions/checkout@v4
