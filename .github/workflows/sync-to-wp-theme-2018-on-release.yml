@@ -16,6 +16,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.ELEMENTS }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          base64 < ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Checkout elements
