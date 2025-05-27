@@ -11,14 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH Key for wp-theme-2018
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.ELEMENTS }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          ssh-add ~/.ssh/id_rsa
-
       - name: Checkout elements
         uses: actions/checkout@v4
         with:
