@@ -3,9 +3,10 @@ on:
   release:
     types: [created]
     env:
-      tag: 1 # ${{ github.event.release.tag_name }}
-
+      tag: ${{ github.event.release.tag_name }}
   workflow_dispatch:  # 👈 manual trigger
+    env:
+      tag: 1
 
 jobs:
   sync-to-wp-theme-2018:
@@ -39,8 +40,6 @@ jobs:
 
       - name: Copy css and js files to wp-theme-2018
         run: |
-          rm -rf theme/wp-theme-2018/assets
-          mkdir -p theme/wp-theme-2018/assets
           rsync -a --exclude='node_modules' --exclude='.git' --exclude='package.json' --exclude='.nojekyll' --exclude='*.map' elements/ theme/wp-theme-2018/assets/
 
       - name: Commit and Push to wp-theme-2018
