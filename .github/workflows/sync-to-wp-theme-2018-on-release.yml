@@ -21,7 +21,7 @@ jobs:
       - name: Checkout wp-theme-2018
         uses: actions/checkout@v4
         with:
-          repository: epfl-si/wp-theme-2018
+          repository: git@github.com:epfl-si/wp-theme-2018.git
           ref: master
           ssh-key: ${{ secrets.ELEMENTS }}
           path: theme
