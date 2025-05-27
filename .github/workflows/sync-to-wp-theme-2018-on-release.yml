@@ -19,7 +19,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
         env: # Or as an environment variable
-          ELEMENTS_PRIVATE_KEY: ${{ secrets.ELEMENTS }}
+          ELEMENTS_PRIVATE_KEY: ${{ secrets.elements }}
 
       - name: Checkout elements
         uses: actions/checkout@v4
