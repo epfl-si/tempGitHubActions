@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup SSH Key for wp-theme-2018
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ELEMENTS }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Checkout elements
         uses: actions/checkout@v4
         with:
@@ -19,12 +26,9 @@ jobs:
           path: elements
 
       - name: Checkout wp-theme-2018
-        uses: actions/checkout@v4
-        with:
-          repository: git@github.com:epfl-si/wp-theme-2018.git
-          ref: master
+        run: |
+          git clone git@github.com:epfl-si/wp-theme-2018.git theme
           ssh-key: ${{ secrets.ELEMENTS }}
-          path: theme
 
       - name: Create new branch in wp-theme-2018
         run: |
