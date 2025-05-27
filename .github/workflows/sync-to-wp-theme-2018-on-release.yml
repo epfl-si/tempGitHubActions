@@ -2,14 +2,13 @@ name: Sync css and js files from elements to wp-theme-2018
 on:
   release:
     types: [created]
-    env:
-      tag: ${{ github.event.release.tag_name }}
   workflow_dispatch:  # 👈 manual trigger
-    env:
-      tag: 1
 
 jobs:
   sync-to-wp-theme-2018:
+    env:
+      tag: "1" #${{ github.event.release.tag_name }}
+
     runs-on: ubuntu-latest
 
     steps:
